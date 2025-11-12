@@ -1,0 +1,16 @@
+# GitHub attributes configuration
+# Ensures shell scripts have correct line endings
+
+# Shell scripts should use LF (Linux/Mac line endings)
+*.sh text eol=lf
+
+# Ensure these files are treated as text
+*.md text
+*.yml text
+*.yaml text
+*.json text
+*.js text
+*.jsx text
+*.css text
+*.html text
+
