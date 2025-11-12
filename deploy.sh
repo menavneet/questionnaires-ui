@@ -1,17 +1,12 @@
 #!/bin/bash
 
 # GitHub Pages Deployment Script
-# This script builds and deploys the app to GitHub Pages
+# This script builds locally and pushes to main branch
+# GitHub Actions will then deploy the dist folder
 
 set -e  # Exit on error
 
-echo "🚀 Starting deployment to GitHub Pages..."
-
-# Check if dist directory exists
-if [ ! -d "dist" ]; then
-  echo "❌ Error: dist directory not found. Run 'npm run build' first."
-  exit 1
-fi
+echo "🚀 Starting local build for GitHub Pages..."
 
 # Check if git is initialized
 if [ ! -d ".git" ]; then
@@ -19,33 +14,41 @@ if [ ! -d ".git" ]; then
   exit 1
 fi
 
-# Get current branch
-CURRENT_BRANCH=$(git branch --show-current)
+# Check for uncommitted changes (excluding dist)
+if [ -n "$(git status --porcelain | grep -v '^?? dist/')" ]; then
+  echo "⚠️  Warning: You have uncommitted changes (excluding dist/)."
+  read -p "Continue anyway? (y/n) " -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 1
+  fi
+fi
 
 echo "📦 Building application..."
 npm run build
 
-echo "📁 Navigating to dist directory..."
-cd dist
-
-# Initialize git in dist folder
-if [ ! -d ".git" ]; then
-  git init
+if [ ! -d "dist" ]; then
+  echo "❌ Error: Build failed - dist directory not found."
+  exit 1
 fi
 
-echo "📝 Adding files to git..."
-git add -A
+echo "✅ Build successful!"
+echo "📝 Adding dist folder to git..."
+git add dist/
 
-echo "💾 Creating commit..."
-git commit -m "Deploy to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')"
-
-echo "🔗 Pushing to gh-pages branch..."
-# Force push to gh-pages branch
-git push -f git@github.com:menavneet/questionnaires-ui.git HEAD:gh-pages
-
-cd ..
-
-echo "✅ Deployment complete!"
-echo "🌐 Your site will be available at: https://menavneet.github.io/questionnaires-ui/"
-echo "⏰ Note: It may take a few minutes for changes to appear."
+# Check if there are changes to commit
+if git diff --staged --quiet; then
+  echo "ℹ️  No changes in dist folder to commit."
+  echo "💡 Tip: Your site is already up to date!"
+else
+  echo "💾 Committing build..."
+  git commit -m "Build: Update dist folder - $(date '+%Y-%m-%d %H:%M:%S')"
+  
+  echo "🔗 Pushing to main branch..."
+  git push origin main
+  
+  echo "✅ Deployment initiated!"
+  echo "🌐 GitHub Actions will deploy your site to: https://menavneet.github.io/questionnaires-ui/"
+  echo "⏰ Check the Actions tab to monitor deployment progress."
+fi
 

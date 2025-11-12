@@ -81,9 +81,7 @@ function QuestionnaireList({ questionnaires, onViewDetails }) {
           </div>
 
           <div className="card-footer">
-            <button className="view-btn">
-              View Details →
-            </button>
+            <button className="view-btn" aria-label="View details"></button>
           </div>
         </div>
       ))}

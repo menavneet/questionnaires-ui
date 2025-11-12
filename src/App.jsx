@@ -4,6 +4,7 @@ import FilterBar from './components/FilterBar'
 import QuestionnaireList from './components/QuestionnaireList'
 import QuestionnaireDetail from './components/QuestionnaireDetail'
 import Pagination from './components/Pagination'
+import ScrollIndicator from './components/ScrollIndicator'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.devnet.icm.social/api'
 const BACKDOOR_TOKEN = import.meta.env.VITE_BACKDOOR_TOKEN || ''
@@ -96,6 +97,7 @@ function App() {
 
   return (
     <div className="app">
+      <ScrollIndicator />
       <header className="app-header">
         <h1>📋 Questionnaires Dashboard</h1>
         <p>View and manage questionnaire submissions</p>

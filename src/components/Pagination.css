@@ -9,20 +9,24 @@
 
 .page-btn {
   padding: 0.75rem 1.5rem;
-  border: 2px solid #667eea;
-  background: white;
+  border: 1px solid rgba(102, 126, 234, 0.6);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: #667eea;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .page-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: rgba(102, 126, 234, 0.9);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .page-btn:disabled {
@@ -39,26 +43,34 @@
 .page-number {
   width: 45px;
   height: 45px;
-  border: 2px solid #e0e0e0;
-  background: white;
+  border: 1px solid rgba(224, 224, 224, 0.6);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: #666;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .page-number:hover {
-  border-color: #667eea;
+  border-color: rgba(102, 126, 234, 0.6);
   color: #667eea;
+  background: rgba(255, 255, 255, 0.6);
   transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.2);
 }
 
 .page-number.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: rgba(102, 126, 234, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
-  border-color: #667eea;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
 .ellipsis {

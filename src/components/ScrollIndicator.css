@@ -1,0 +1,21 @@
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-indicator-bar {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(102, 126, 234, 0.9),
+    rgba(118, 75, 162, 0.9)
+  );
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
